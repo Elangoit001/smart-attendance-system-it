@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 const connectDB = require('./config/db');
 
 // Load environment variables
@@ -36,12 +37,25 @@ app.use('/api/audit', require('./routes/auditRoutes'));
 console.log('--- Routes mounted ---');
 
 // Serve uploaded files
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Health check route
-app.get('/', (req, res) => {
-    res.send('Smart Attendance System Backend Running on MongoDB Atlas');
-});
+// Production Settings: Serve React Frontend
+if (process.env.NODE_ENV === 'production') {
+    const frontendDist = path.join(__dirname, '../frontend/dist');
+    app.use(express.static(frontendDist));
+
+    // Handle React routing, return all non-api requests to React app
+    app.get('*', (req, res) => {
+        if (!req.url.startsWith('/api')) {
+            res.sendFile(path.join(frontendDist, 'index.html'));
+        }
+    });
+} else {
+    // Health check route for dev
+    app.get('/', (req, res) => {
+        res.send('Smart Attendance System Backend Running on MongoDB Atlas');
+    });
+}
 
 // Generic Error Handler
 app.use((err, req, res, next) => {
