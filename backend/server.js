@@ -45,7 +45,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(frontendDist));
 
     // Handle React routing, return all non-api requests to React app
-    app.get('*', (req, res) => {
+    app.get('(.*)', (req, res) => {
         if (!req.url.startsWith('/api')) {
             res.sendFile(path.join(frontendDist, 'index.html'));
         }
