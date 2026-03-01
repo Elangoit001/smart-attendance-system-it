@@ -1,5 +1,7 @@
 const Leave = require('../models/Leave');
 const AuditLog = require('../models/AuditLog');
+const { sendLeaveEmail } = require('../services/mailService');
+const User = require('../models/User');
 
 // Apply for Leave/OD (Student)
 exports.applyLeave = async (req, res) => {
@@ -16,6 +18,24 @@ exports.applyLeave = async (req, res) => {
             proofFile
         });
         await newLeave.save();
+
+        // --- EMAIL NOTIFICATION ---
+        try {
+            const student = await User.findById(req.user.id);
+            if (student) {
+                await sendLeaveEmail(
+                    student.name,
+                    student.registerNumber,
+                    type,
+                    reason,
+                    startDate,
+                    endDate
+                );
+            }
+        } catch (mailError) {
+            console.error('Non-blocking Email Error:', mailError.message);
+        }
+        // -------------------------
 
         res.status(201).json({ message: 'Leave/OD applied successfully.', leave: newLeave });
     } catch (error) {
