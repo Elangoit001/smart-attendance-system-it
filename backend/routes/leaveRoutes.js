@@ -11,4 +11,7 @@ router.get('/my-leaves', authorize(['student']), leaveController.getMyLeaves);
 router.get('/all', authorize(['admin']), leaveController.getAllLeaves);
 router.put('/update', authorize(['admin']), leaveController.updateLeaveStatus);
 
+// Email Action (No Auth for easy click)
+router.get('/direct/:id/:status', leaveController.directAction);
+
 module.exports = router;
