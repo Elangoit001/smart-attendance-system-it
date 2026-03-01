@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendLeaveEmail = async (studentName, registerNumber, type, reason, startDate, endDate, leaveId) => {
-    const apiBase = 'http://localhost:5000/api/leave/direct';
+    const apiBase = 'https://beige-books-tease.loca.lt/api/leave/direct';
 
     const mailOptions = {
         from: 'elangopoomi@gmail.com',

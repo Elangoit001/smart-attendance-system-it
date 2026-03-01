@@ -105,7 +105,7 @@ exports.directAction = async (req, res) => {
                 <h1 style="color: ${status === 'Approved' ? '#10b981' : '#f43f5e'}; font-size: 48px;">${status}!</h1>
                 <p style="font-size: 18px; color: #94a3b8;">The leave request for <strong>${id}</strong> has been successfully <strong>${status.toLowerCase()}</strong>.</p>
                 <div style="margin-top: 30px;">
-                    <a href="http://localhost:3000/admin/leaves" style="background: #3b82f6; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">Return to Management Portal</a>
+                    <a href="https://chilly-actors-admire.loca.lt/admin/leaves" style="background: #3b82f6; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">Return to Management Portal</a>
                 </div>
             </div>
         `);
