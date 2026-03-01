@@ -57,7 +57,7 @@ const Login = () => {
                                 type="text"
                                 required
                                 className="w-full h-14 pl-12 pr-4 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none text-white transition-all text-lg placeholder-slate-700 font-medium"
-                                placeholder="Ex: 22IT042"
+                                placeholder="Ex: 22IT3001"
                                 value={identifier}
                                 onChange={(e) => setIdentifier(e.target.value)}
                             />

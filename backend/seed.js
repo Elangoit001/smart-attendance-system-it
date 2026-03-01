@@ -47,16 +47,14 @@ const seedData = async () => {
         // 2. Create 3rd Year Students (28 students) [22IT3...]
         for (let i = 1; i <= 28; i++) {
             const rollSuffix = i.toString().padStart(3, '0');
-            const rollIdSuffix = rollSuffix.slice(-2); // Last 2 digits
             const rollNumber = `22IT3${rollSuffix}`; // e.g., 22IT3001
             const name = `Student ${i}`;
-            const password = `${name}${rollIdSuffix}`; // Password: Name + Last 2 (e.g. Student 101)
 
             const student = {
                 name: name,
                 registerNumber: rollNumber,
                 email: `student3_${i}@college.edu`,
-                password: password,
+                password: rollNumber, // Password is same as Roll Number for easy access
                 role: 'student',
                 year: 3
             };
@@ -67,16 +65,14 @@ const seedData = async () => {
         // 3. Create 2nd Year Students (30 students) [22IT2...]
         for (let i = 1; i <= 30; i++) {
             const rollSuffix = i.toString().padStart(3, '0');
-            const rollIdSuffix = rollSuffix.slice(-2); // Last 2 digits
             const rollNumber = `22IT2${rollSuffix}`; // e.g., 22IT2001
-            const name = `Student ${i + 30}`; // Different names for second batch
-            const password = `${name}${rollIdSuffix}`; // Password: Name + Last 2
+            const name = `Student ${i + 30}`;
 
             const student = {
                 name: name,
                 registerNumber: rollNumber,
                 email: `student2_${i}@college.edu`,
-                password: password,
+                password: rollNumber, // Password is same as Roll Number
                 role: 'student',
                 year: 2
             };
